@@ -1,4 +1,4 @@
-package com.yosep.payment2;
+package com.yosep.payment2.wallet;
 
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;

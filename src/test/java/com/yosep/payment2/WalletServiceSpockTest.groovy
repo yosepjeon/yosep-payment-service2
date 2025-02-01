@@ -1,5 +1,10 @@
 package com.yosep.payment2
 
+import com.yosep.payment2.wallet.AddBalanceWalletRequest
+import com.yosep.payment2.wallet.CreateWalletRequest
+import com.yosep.payment2.wallet.Wallet
+import com.yosep.payment2.wallet.WalletRepository
+import com.yosep.payment2.wallet.WalletService
 import spock.lang.Specification;
 
 class WalletSpockTest extends Specification {

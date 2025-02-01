@@ -1,4 +1,4 @@
-package com.yosep.payment2;
+package com.yosep.payment2.wallet;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

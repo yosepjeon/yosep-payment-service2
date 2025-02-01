@@ -1,4 +1,4 @@
-package com.yosep.payment2;
+package com.yosep.payment2.wallet;
 
 import java.math.BigDecimal;
 
