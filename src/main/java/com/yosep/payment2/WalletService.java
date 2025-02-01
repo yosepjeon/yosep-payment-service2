@@ -21,7 +21,7 @@ public class WalletService {
 		// 유저 아이디로 월렛을 조회
 		// 있으면 오류
 		// 없으면 생성
-
+		// FIXME
 		boolean isWalletExist = walletRepository.findWalletByUserId(request.userId())
 			.isPresent();
 
@@ -48,11 +48,12 @@ public class WalletService {
 
 	@Transactional
 	public AddBalanceWalletResponse addBalance(AddBalanceWalletRequest request) {
+		// FIXME
 		/*
 		1. 잔액이 마이너스가 되면 오류가 발생해야 한다.
 		2. 최대 충전한도는 10만원이다.
 		 */
-		final Wallet wallet = walletRepository.findWalletByUserId(request.walletId())
+		final Wallet wallet = walletRepository.findById(request.walletId())
 			.orElseThrow(() -> new RuntimeException("지갑이 존재하지 않습니다."));
 		BigDecimal balance = wallet.getBalance().add(request.amount());
 		if (request.amount().compareTo(BigDecimal.ZERO) < 0) {

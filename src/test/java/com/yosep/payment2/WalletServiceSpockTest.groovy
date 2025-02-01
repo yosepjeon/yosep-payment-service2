@@ -77,10 +77,11 @@ class WalletSpockTest extends Specification {
         given:
         def userId = 1L
         def wallet = new Wallet(userId)
+        def walletId = 1L
         wallet.balance = new BigDecimal(1000)
-        walletRepository.findWalletByUserId(userId) >> Optional.of(wallet)
+        walletRepository.findById(walletId) >> Optional.of(wallet)
         walletRepository.save(_) >> wallet
-        def addBalanceRequest = new AddBalanceWalletRequest(userId, new BigDecimal(1000))
+        def addBalanceRequest = new AddBalanceWalletRequest(walletId, new BigDecimal(1000))
 
         when:
         def result = walletService.addBalance(addBalanceRequest)
@@ -95,9 +96,10 @@ class WalletSpockTest extends Specification {
         given:
         def userId = 1L
         def wallet = new Wallet(userId)
+        def walletId = 1L
         wallet.balance = new BigDecimal(1000)
-        walletRepository.findWalletByUserId(userId) >> Optional.empty()
-        def addBalanceRequest = new AddBalanceWalletRequest(userId, new BigDecimal(1000))
+        walletRepository.findWalletByUserId(walletId) >> Optional.empty()
+        def addBalanceRequest = new AddBalanceWalletRequest(walletId, new BigDecimal(1000))
 
         when:
         def result = walletService.addBalance(addBalanceRequest)
@@ -112,10 +114,11 @@ class WalletSpockTest extends Specification {
         given:
         def userId = 1L
         def wallet = new Wallet(userId)
+        def walletId = 1L
         wallet.balance = new BigDecimal(1000)
-        walletRepository.findWalletByUserId(userId) >> Optional.of(wallet)
+        walletRepository.findById(walletId) >> Optional.of(wallet)
         walletRepository.save(_) >> wallet
-        def addBalanceRequest = new AddBalanceWalletRequest(userId, new BigDecimal(-1100))
+        def addBalanceRequest = new AddBalanceWalletRequest(walletId, new BigDecimal(-1100))
 
         when:
         def result = walletService.addBalance(addBalanceRequest)
@@ -130,10 +133,11 @@ class WalletSpockTest extends Specification {
         given:
         def userId = 1L
         def wallet = new Wallet(userId)
+        def walletId = 1L
         wallet.balance = new BigDecimal(1000)
-        walletRepository.findWalletByUserId(userId) >> Optional.of(wallet)
+        walletRepository.findById(walletId) >> Optional.of(wallet)
         walletRepository.save(_) >> wallet
-        def addBalanceRequest = new AddBalanceWalletRequest(userId, new BigDecimal(100_001))
+        def addBalanceRequest = new AddBalanceWalletRequest(walletId, new BigDecimal(100_001))
 
         when:
         def result = walletService.addBalance(addBalanceRequest)
