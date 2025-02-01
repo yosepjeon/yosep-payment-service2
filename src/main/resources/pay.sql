@@ -16,9 +16,24 @@ create index user_id_create_at
 create table transaction
 (
     id          bigint primary key auto_increment,
-    wallet_id   bigint         not null,
-    order_id    bigint         not null,
-    amount      decimal(10, 2) not null,
-    type        varchar(255)   not null,
-    create_time timestamp      not null
+    user_id     bigint              not null,
+    wallet_id   bigint,
+    order_id    varchar(100)        not null,
+    transaction_type varchar(30)    not null,
+    amount      decimal(10, 2),
+    description varchar(200),
+    created_at  timestamp           not null,
+    updated_at  timestamp           not null
 );
+
+create index user_id
+    on transaction (user_id);
+
+create index wallet_id
+    on transaction (wallet_id);
+
+create index order_id
+    on transaction (order_id);
+
+create index created_at
+    on transaction (created_at);

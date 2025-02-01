@@ -28,11 +28,4 @@ public class WalletController {
 		return walletService.findWalletByUserId(userId);
 	}
 
-	@PostMapping("/api/wallets/add-balance")
-	public AddBalanceWalletResponse addBalance(
-		@RequestBody AddBalanceWalletRequest request
-	) {
-		return walletService.addBalance(request);
-	}
-
 }

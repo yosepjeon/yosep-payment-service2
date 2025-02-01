@@ -1,0 +1,18 @@
+POST http://localhost:8080/api/balance/charge
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "orderId": "test-1",
+  "amount": 1000
+}
+
+###
+POST http://localhost:8080/api/balance/payment
+Content-Type: application/json
+
+{
+  "walletId": 0,
+  "courseId": "",
+  "amount": {}
+}

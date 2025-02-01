@@ -46,6 +46,18 @@ public class WalletService {
 			.orElse(null);
 	}
 
+	public FindWalletResponse findWalletByWalletId(Long walletId) {
+		return walletRepository.findById(walletId)
+			.map(wallet -> new FindWalletResponse(
+				wallet.getId(),
+				wallet.getUserId(),
+				wallet.getBalance(),
+				wallet.getCreatedAt(),
+				wallet.getUpdatedAt()
+			))
+			.orElse(null);
+	}
+
 	@Transactional
 	public AddBalanceWalletResponse addBalance(AddBalanceWalletRequest request) {
 		// FIXME
@@ -56,14 +68,14 @@ public class WalletService {
 		final Wallet wallet = walletRepository.findById(request.walletId())
 			.orElseThrow(() -> new RuntimeException("지갑이 존재하지 않습니다."));
 		BigDecimal balance = wallet.getBalance().add(request.amount());
-		if (request.amount().compareTo(BigDecimal.ZERO) < 0) {
+		wallet.addBalance(request.amount());
+		if (wallet.getBalance().compareTo(BigDecimal.ZERO) < 0) {
 			throw new RuntimeException("잔액이 충분하지 않습니다.");
 		}
 		if (BALANCE_LIMIT.compareTo(balance) < 0) {
 			throw new RuntimeException("최대 충전 한도를 초과하였습니다.");
 		}
 
-		wallet.addBalance(request.amount());
 		walletRepository.save(wallet);
 		return new AddBalanceWalletResponse(
 			wallet.getId(),
