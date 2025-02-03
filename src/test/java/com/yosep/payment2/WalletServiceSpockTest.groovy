@@ -19,7 +19,7 @@ class WalletSpockTest extends Specification {
     def "지갑 생성 요청 시 지갑을 갖고있지 않다면 생성된다."() {
         given:
         CreateWalletRequest request = new CreateWalletRequest(1L)
-        walletRepository.findWalletByUserId(1L) >> Optional.empty()
+        walletRepository.findTopByUserId(1L) >> Optional.empty()
         walletRepository.save(_) >> new Wallet(request.userId)
 
         when:
@@ -35,7 +35,7 @@ class WalletSpockTest extends Specification {
     def "지갑 생성 요청 시 지갑을 이미 갖고 있다면 오류를 응답한다."() {
         given:
         CreateWalletRequest request = new CreateWalletRequest(1L)
-        walletRepository.findWalletByUserId(1L) >> Optional.of(new Wallet(1L))
+        walletRepository.findTopByUserId(1L) >> Optional.of(new Wallet(1L))
         walletRepository.save(_) >> new Wallet(request.userId)
 
         when:
@@ -52,7 +52,7 @@ class WalletSpockTest extends Specification {
         def userId = 1L
         def wallet = new Wallet(userId)
         wallet.balance = new BigDecimal(1000)
-        walletRepository.findWalletByUserId(userId) >> Optional.of(wallet)
+        walletRepository.findTopByUserId(userId) >> Optional.of(wallet)
 
         when:
         def result = walletService.findWalletByUserId(userId)
@@ -68,7 +68,7 @@ class WalletSpockTest extends Specification {
         def userId = 1L
         def wallet = new Wallet(userId)
         wallet.balance = new BigDecimal(1000)
-        walletRepository.findWalletByUserId(userId) >> Optional.empty()
+        walletRepository.findTopByUserId(userId) >> Optional.empty()
 
         when:
         def result = walletService.findWalletByUserId(userId)
@@ -103,7 +103,7 @@ class WalletSpockTest extends Specification {
         def wallet = new Wallet(userId)
         def walletId = 1L
         wallet.balance = new BigDecimal(1000)
-        walletRepository.findWalletByUserId(walletId) >> Optional.empty()
+        walletRepository.findTopByUserId(walletId) >> Optional.empty()
         def addBalanceRequest = new AddBalanceWalletRequest(walletId, new BigDecimal(1000))
 
         when:

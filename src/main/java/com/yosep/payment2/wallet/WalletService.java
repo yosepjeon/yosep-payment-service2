@@ -22,7 +22,7 @@ public class WalletService {
 		// 있으면 오류
 		// 없으면 생성
 		// FIXME
-		boolean isWalletExist = walletRepository.findWalletByUserId(request.userId())
+		boolean isWalletExist = walletRepository.findTopByUserId(request.userId())
 			.isPresent();
 
 		if (isWalletExist) {
@@ -35,7 +35,7 @@ public class WalletService {
 	}
 
 	public FindWalletResponse findWalletByUserId(Long userId) {
-		return walletRepository.findWalletByUserId(userId)
+		return walletRepository.findTopByUserId(userId)
 			.map(wallet -> new FindWalletResponse(
 				wallet.getId(),
 				wallet.getUserId(),
